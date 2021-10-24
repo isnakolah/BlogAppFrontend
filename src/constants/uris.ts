@@ -3,7 +3,7 @@ import { QueryParam } from "../types/QueryParam";
 const BASE =
   process.env.REACT_APP_BASE_URI || window.location.origin + "/api/v1";
 
-class ApiUris {
+class uris {
   user = {
     getSingleUser: `{BASE}/user`,
     createUser: `{BASE}/user`,
@@ -33,4 +33,4 @@ class ApiUris {
   }
 }
 
-export default ApiUris;
+export default uris;

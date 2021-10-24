@@ -1,17 +1,21 @@
-class routes {
-  home = "/";
+const routes = {
+  home: "/",
 
-  newPosts = {
+  newPosts: {
     all: "/new-posts",
-  };
+  },
 
-  readPosts = {
+  readPosts: {
     all: "/read-posts",
-  };
+  },
 
-  likedPosts = {
+  likedPosts: {
     all: "/liked-posts",
-  };
-}
+  },
+
+  account: {
+    view: "/account",
+  },
+};
 
 export default routes;

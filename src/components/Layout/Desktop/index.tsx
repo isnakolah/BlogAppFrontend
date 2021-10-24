@@ -1,7 +1,14 @@
 import React from "react";
+import { AppBar, Toolbar } from "@mui/material";
 
-const Layout: React.FC = () => {
-  return <></>;
+const Desktop: React.FC = () => {
+  return (
+    <AppBar position="fixed">
+      <Toolbar>
+        <div>This is the toolbar</div>
+      </Toolbar>
+    </AppBar>
+  );
 };
 
-export default Layout;
+export default Desktop;

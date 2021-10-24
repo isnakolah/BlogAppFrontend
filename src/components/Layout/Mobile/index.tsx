@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import { BottomNavigation, BottomNavigationAction, Paper } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import BookmarksIcon from "@mui/icons-material/Bookmarks";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import ExploreIcon from "@mui/icons-material/Explore";
 import routes from "../../../constants/routes";
 
 const Mobile: React.FC = () => {
   const [value, setValue] = useState<string>(window.location.pathname);
+
+  const isAuthor = true;
 
   const navProps = (route: string) => {
     return { to: route, value: route, component: RouterLink };
@@ -25,12 +29,22 @@ const Mobile: React.FC = () => {
           {...navProps(routes.home)}
         />
         <BottomNavigationAction
-          icon={<FavoriteIcon />}
-          {...navProps(routes.account.view)}
+          icon={<ExploreIcon />}
+          {...navProps(routes.posts.all)}
+        />
+        {isAuthor && (
+          <BottomNavigationAction
+            icon={<AddCircleIcon />}
+            {...navProps(routes.posts.create)}
+          />
+        )}
+        <BottomNavigationAction
+          icon={<BookmarksIcon />}
+          {...navProps(routes.posts.bookmarked)}
         />
         <BottomNavigationAction
-          icon={<LocationOnIcon />}
-          {...navProps(routes.newPosts.all)}
+          icon={<AccountCircleIcon />}
+          {...navProps(routes.account.view)}
         />
       </BottomNavigation>
     </Paper>

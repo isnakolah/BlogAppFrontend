@@ -1,13 +1,14 @@
 import {
   AppBar,
   Grid,
-  IconButton,
   Toolbar,
-  Typography,
-  useMediaQuery,
   useTheme,
+  Typography,
+  IconButton,
+  useMediaQuery,
 } from "@mui/material";
 import ForumIcon from "@mui/icons-material/Forum";
+import BlogPostCard from "../../components/BlogPostCard";
 
 const Home = () => {
   const theme = useTheme();
@@ -16,15 +17,23 @@ const Home = () => {
   return (
     <>
       {screenSizeIsMobile && (
-        <AppBar position="fixed">
-          <Toolbar component={Grid} justifyContent="space-between">
-            <Typography variant="subtitle2">BLOG APP</Typography>
-            <IconButton>
-              <ForumIcon />
-            </IconButton>
-          </Toolbar>
-        </AppBar>
+        <>
+          <AppBar position="fixed">
+            <Toolbar component={Grid} justifyContent="space-between">
+              <Typography variant="subtitle2">BLOG APP</Typography>
+              <IconButton>
+                <ForumIcon sx={{ color: "white" }} />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <Toolbar />
+        </>
       )}
+      <BlogPostCard />
+      <BlogPostCard />
+      <BlogPostCard />
+      <BlogPostCard />
+      <BlogPostCard />
     </>
   );
 };

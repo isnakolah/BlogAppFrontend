@@ -1,14 +1,18 @@
 import { CssBaseline } from "@mui/material";
-import { Switch } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import Layout from "./components/Layout";
+import routes from "./constants/routes";
+import Home from "./pages/Home";
 
 const App = () => {
   return (
     <>
       <CssBaseline />
-      <Layout>
-        <Switch></Switch>
-      </Layout>
+      <Switch>
+        <Layout>
+          <Route exact path={routes.home} component={Home} />
+        </Layout>
+      </Switch>
     </>
   );
 };

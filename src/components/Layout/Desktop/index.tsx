@@ -1,13 +1,20 @@
 import React from "react";
-import { AppBar, Toolbar } from "@mui/material";
+import { AppBar, Toolbar, useMediaQuery, useTheme } from "@mui/material";
 
 const Desktop: React.FC = () => {
+  const theme = useTheme();
+  const screenSizeIsNotMobile = useMediaQuery(theme.breakpoints.up("sm"));
+
   return (
-    <AppBar position="fixed">
-      <Toolbar>
-        <div>This is the toolbar</div>
-      </Toolbar>
-    </AppBar>
+    <>
+      {screenSizeIsNotMobile && (
+        <AppBar position="fixed">
+          <Toolbar>
+            <div>This is the toolbar</div>
+          </Toolbar>
+        </AppBar>
+      )}
+    </>
   );
 };
 

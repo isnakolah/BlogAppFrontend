@@ -1,6 +1,6 @@
 import { PhoneNumber } from "./PhoneNumber";
 
-export interface User {
+interface User {
   firstName: string;
   lastName: string;
   email: string;

@@ -28,11 +28,15 @@ const Explore: React.FC = () => {
 
   return (
     <>
-      <Grid container direction="row">
-        <Grid item xs={10} sx={{ width: "100%" }}>
+      <Grid
+        container
+        direction="row"
+        justifyContent="flex-end"
+        sx={{ mt: "0.7rem" }}>
+        <Grid item xs={8}>
           <SearchBar fullWidth />
         </Grid>
-        <Grid item xs={2}>
+        <Grid item xs={2} sx={{ display: "flex", justifyContent: "flex-end" }}>
           <IconButton>
             <AddCircleRoundedIcon />
           </IconButton>
@@ -52,7 +56,7 @@ const Explore: React.FC = () => {
             <Chip
               label={data.label}
               onDelete={handleDelete(data)}
-              color="primary"
+              color="info"
             />
           </ListItem>
         ))}

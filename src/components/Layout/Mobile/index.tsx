@@ -36,7 +36,7 @@ const Mobile: React.FC<Props> = ({ children }) => {
           />
           <BottomNavigationAction
             icon={<ExploreIcon />}
-            {...navProps(routes.posts.all)}
+            {...navProps(routes.explore)}
           />
           {isAuthor && (
             <BottomNavigationAction

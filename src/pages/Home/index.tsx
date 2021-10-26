@@ -1,6 +1,7 @@
 import {
-  AppBar,
   Grid,
+  Badge,
+  AppBar,
   Toolbar,
   useTheme,
   Typography,
@@ -22,7 +23,9 @@ const Home = () => {
             <Toolbar component={Grid} justifyContent="space-between">
               <Typography variant="subtitle2">BLOG APP</Typography>
               <IconButton>
-                <ForumIcon sx={{ color: "white" }} />
+                <Badge badgeContent={12} color="error">
+                  <ForumIcon sx={{ color: "white" }} />
+                </Badge>
               </IconButton>
             </Toolbar>
           </AppBar>

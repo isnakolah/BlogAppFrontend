@@ -1,7 +1,35 @@
 import { useState } from "react";
-import { Chip, Box, Grid, IconButton, styled } from "@mui/material";
+import { Chip, Box, Grid, IconButton, styled, Tabs, Tab } from "@mui/material";
 import SearchBar from "./../../components/SearchBar/index";
 import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
+
+const a11yProps = (index: number) => {
+  return {
+    id: `simple-tab-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
+  };
+};
+
+interface TabPanelProps {
+  children?: React.ReactNode;
+  index: number;
+  value: number;
+}
+
+const TabPanel = (props: TabPanelProps) => {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <Box
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}>
+      {value === index && <Box sx={{ p: 2 }}>{children}</Box>}
+    </Box>
+  );
+};
 
 interface ChipData {
   id: number;
@@ -14,6 +42,12 @@ const ListItem = styled("li")(({ theme }) => ({
 }));
 
 const Explore: React.FC = () => {
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
+
   const [chipData, setChipData] = useState<readonly ChipData[]>([
     { id: 0, label: "Angular" },
     { id: 1, label: "jQuery" },
@@ -28,11 +62,7 @@ const Explore: React.FC = () => {
 
   return (
     <>
-      <Grid
-        container
-        direction="row"
-        justifyContent="flex-end"
-        sx={{ mt: "0.7rem" }}>
+      <Grid container justifyContent="flex-end" sx={{ mt: "0.7rem" }}>
         <Grid item xs={8}>
           <SearchBar fullWidth />
         </Grid>
@@ -44,11 +74,11 @@ const Explore: React.FC = () => {
       </Grid>
       <Box
         sx={{
+          m: 0,
+          p: "0.7rem",
           display: "flex",
           overflow: "auto",
           listStyle: "none",
-          m: 0,
-          p: "0.7rem",
         }}
         component="ul">
         {chipData.map((data) => (
@@ -60,6 +90,30 @@ const Explore: React.FC = () => {
             />
           </ListItem>
         ))}
+      </Box>
+      <Box>
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: "58px",
+            width: "100%",
+          }}>
+          <Tabs
+            centered
+            value={value}
+            onChange={handleChange}
+            variant="fullWidth"
+            aria-label="search result options">
+            <Tab label="Articles" {...a11yProps(0)} />
+            <Tab label="Authors" {...a11yProps(1)} />
+          </Tabs>
+        </Box>
+        <TabPanel value={value} index={0}>
+          A list of articles
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          A list of authors
+        </TabPanel>
       </Box>
     </>
   );

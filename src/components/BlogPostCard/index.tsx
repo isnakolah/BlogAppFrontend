@@ -31,7 +31,7 @@ const BlogPostCard = () => {
           padding: "0.2rem",
           borderRadius: "0",
           maxWidth: 700,
-          minWidth: 400,
+          minWidth: 300,
         }}>
         <CardHeader
           avatar={

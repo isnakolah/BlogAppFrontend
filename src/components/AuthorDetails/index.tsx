@@ -1,8 +1,5 @@
-import { Box, Card, Avatar, CardHeader, CardActions } from "@mui/material";
+import { Card, Avatar, Rating, CardHeader, CardActions } from "@mui/material";
 import { red } from "@mui/material/colors";
-import StarOutlineRoundedIcon from "@mui/icons-material/StarOutlineRounded";
-import StarRateRoundedIcon from "@mui/icons-material/StarRateRounded";
-import StarHalfRoundedIcon from "@mui/icons-material/StarHalfRounded";
 
 const AuthorDetails = () => {
   return (
@@ -18,13 +15,7 @@ const AuthorDetails = () => {
           subheader="Writer since September 14, 2016"
         />
         <CardActions sx={{ justifyContent: "center" }}>
-          <Box>
-            <StarRateRoundedIcon />
-            <StarRateRoundedIcon />
-            <StarRateRoundedIcon />
-            <StarHalfRoundedIcon />
-            <StarOutlineRoundedIcon />
-          </Box>
+          <Rating name="read-only" value={3} readOnly />
         </CardActions>
       </Card>
     </>

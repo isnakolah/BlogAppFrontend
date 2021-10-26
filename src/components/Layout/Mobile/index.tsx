@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { Paper, BottomNavigation, BottomNavigationAction } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
+// import CreateIcon from "@mui/icons-material/Create";
+import BiotechIcon from "@mui/icons-material/Biotech";
 import BookmarksIcon from "@mui/icons-material/Bookmarks";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ExploreIcon from "@mui/icons-material/Explore";
@@ -40,7 +41,7 @@ const Mobile: React.FC<Props> = ({ children }) => {
           />
           {isAuthor && (
             <BottomNavigationAction
-              icon={<AddCircleIcon />}
+              icon={<BiotechIcon />}
               {...navProps(routes.posts.create)}
             />
           )}

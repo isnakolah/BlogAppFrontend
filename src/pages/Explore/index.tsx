@@ -49,7 +49,11 @@ const Explore: React.FC = () => {
         component="ul">
         {chipData.map((data) => (
           <ListItem key={data.id}>
-            <Chip label={data.label} onDelete={handleDelete(data)} />
+            <Chip
+              label={data.label}
+              onDelete={handleDelete(data)}
+              color="primary"
+            />
           </ListItem>
         ))}
       </Box>

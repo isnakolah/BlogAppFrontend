@@ -10,7 +10,15 @@ const Layout: React.FC<Props> = ({ children }) => {
   const theme = useTheme();
   const screenSizeIsMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-  return <>{screenSizeIsMobile ? <Mobile>{children}</Mobile> : <Desktop />}</>;
+  return (
+    <>
+      {screenSizeIsMobile ? (
+        <Mobile>{children}</Mobile>
+      ) : (
+        <Desktop>{children}</Desktop>
+      )}
+    </>
+  );
 };
 
 export default Layout;

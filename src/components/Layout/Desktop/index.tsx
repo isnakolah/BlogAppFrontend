@@ -1,19 +1,23 @@
 import React from "react";
-import { AppBar, Toolbar, useMediaQuery, useTheme } from "@mui/material";
+import { AppBar, Toolbar, Grid } from "@mui/material";
 
-const Desktop: React.FC = () => {
-  const theme = useTheme();
-  const screenSizeIsNotMobile = useMediaQuery(theme.breakpoints.up("sm"));
+type Props = {
+  children: React.ReactElement<any, any>;
+};
 
+const Desktop: React.FC<Props> = ({ children }) => {
   return (
     <>
-      {screenSizeIsNotMobile && (
-        <AppBar position="fixed">
-          <Toolbar>
-            <div>This is the toolbar</div>
-          </Toolbar>
-        </AppBar>
-      )}
+      <AppBar position="fixed">
+        <Toolbar>
+          <div>This is the toolbar</div>
+        </Toolbar>
+      </AppBar>
+      <Grid container justifyContent="center">
+        <Grid item sx={{ maxWidth: 700 }}>
+          {children}
+        </Grid>
+      </Grid>
     </>
   );
 };

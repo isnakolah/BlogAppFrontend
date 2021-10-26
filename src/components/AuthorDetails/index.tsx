@@ -1,5 +1,6 @@
 import { Card, Avatar, Rating, CardHeader, CardActions } from "@mui/material";
 import { red } from "@mui/material/colors";
+import StarRoundedIcon from "@mui/icons-material/StarRounded";
 
 const AuthorDetails = () => {
   return (
@@ -15,7 +16,13 @@ const AuthorDetails = () => {
           subheader="Writer since September 14, 2016"
         />
         <CardActions sx={{ justifyContent: "center" }}>
-          <Rating name="read-only" value={3} readOnly />
+          <Rating
+            readOnly
+            name="stars"
+            precision={0.5}
+            value={2.5}
+            emptyIcon={<StarRoundedIcon style={{ opacity: 0.75 }} />}
+          />
         </CardActions>
       </Card>
     </>

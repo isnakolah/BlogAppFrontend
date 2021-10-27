@@ -2,9 +2,13 @@ import { TextField, Autocomplete } from "@mui/material";
 
 type Props = {
   fullWidth?: boolean;
+  autoFocus?: boolean;
 };
 
-const SearchBar: React.FC<Props> = ({ fullWidth = false }) => {
+const SearchBar: React.FC<Props> = ({
+  fullWidth = false,
+  autoFocus = false,
+}) => {
   return (
     <Autocomplete
       freeSolo
@@ -21,6 +25,7 @@ const SearchBar: React.FC<Props> = ({ fullWidth = false }) => {
           InputProps={{
             ...params.InputProps,
             type: "search",
+            autoFocus: autoFocus,
             sx: { borderRadius: 4 },
           }}
         />

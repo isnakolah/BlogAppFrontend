@@ -1,7 +1,21 @@
-import { useState } from "react";
-import { Chip, Box, Grid, IconButton, styled, Tabs, Tab } from "@mui/material";
+import { useState, createRef } from "react";
+import {
+  Fab,
+  Tab,
+  Box,
+  Chip,
+  Grid,
+  Tabs,
+  Slide,
+  AppBar,
+  styled,
+  Toolbar,
+  useScrollTrigger,
+} from "@mui/material";
 import SearchBar from "./../../components/SearchBar/index";
-import AddCircleRoundedIcon from "@mui/icons-material/AddCircleRounded";
+import SearchIcon from "@mui/icons-material/Search";
+import BlogPostCard from "./../../components/BlogPostCard/index";
+// import ReactDOM from "react-dom";
 
 const a11yProps = (index: number) => {
   return {
@@ -25,8 +39,9 @@ const TabPanel = (props: TabPanelProps) => {
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
+      sx={{ maxHeight: "calc(100vh -   104px)" }}
       {...other}>
-      {value === index && <Box sx={{ p: 2 }}>{children}</Box>}
+      {value === index && <Box>{children}</Box>}
     </Box>
   );
 };
@@ -43,10 +58,13 @@ const ListItem = styled("li")(({ theme }) => ({
 
 const Explore: React.FC = () => {
   const [value, setValue] = useState(0);
+  const searchRef = createRef<HTMLDivElement>();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
+
+  const trigger = useScrollTrigger();
 
   const [chipData, setChipData] = useState<readonly ChipData[]>([
     { id: 0, label: "Angular" },
@@ -60,56 +78,100 @@ const Explore: React.FC = () => {
     setChipData((chips) => chips.filter((chip) => chip.id !== chipToDelete.id));
   };
 
+  const handleSearchButtonClick = () => {
+    if (searchRef !== null) {
+      // ReactDOM.findDOMNode(searchRef?.current).focus();
+      console.log(searchRef.current);
+    }
+  };
+
   return (
     <>
-      <Grid container justifyContent="flex-end" sx={{ mt: "0.7rem" }}>
-        <Grid item xs={8}>
-          <SearchBar fullWidth />
+      <AppBar position="fixed">
+        <Grid
+          container
+          justifyContent="center"
+          component={Toolbar}
+          sx={{ backgroundColor: "#fff", zIndex: 1 }}>
+          <Grid item xs={8}>
+            <SearchBar fullWidth ref={searchRef} />
+          </Grid>
         </Grid>
-        <Grid item xs={2} sx={{ display: "flex", justifyContent: "flex-end" }}>
-          <IconButton>
-            <AddCircleRoundedIcon />
-          </IconButton>
-        </Grid>
-      </Grid>
-      <Box
-        sx={{
-          m: 0,
-          p: "0.7rem",
-          display: "flex",
-          overflow: "auto",
-          listStyle: "none",
-        }}
-        component="ul">
-        {chipData.map((data) => (
-          <ListItem key={data.id}>
-            <Chip
-              label={data.label}
-              onDelete={handleDelete(data)}
-              color="info"
-            />
-          </ListItem>
-        ))}
-      </Box>
+      </AppBar>
+      <Slide
+        appear={false}
+        direction="down"
+        in={trigger}
+        easing={{ exit: "easing.easeOut" }}>
+        <AppBar position="fixed" sx={{ backgroundColor: "#fff" }}>
+          <Box
+            sx={{
+              m: 0,
+              p: "0.7rem",
+              display: "flex",
+              overflow: "auto",
+              listStyle: "none",
+            }}
+            component="ul">
+            {chipData.map((data) => (
+              <ListItem key={data.id}>
+                <Chip
+                  label={data.label}
+                  onDelete={handleDelete(data)}
+                  color="info"
+                />
+              </ListItem>
+            ))}
+          </Box>
+        </AppBar>
+      </Slide>
       <Box>
-        <Box
+        <Grid
+          container
           sx={{
-            position: "absolute",
-            bottom: "58px",
+            position: "fixed",
+            bottom: 56,
             width: "100%",
+            zIndex: 1,
+            backgroundColor: "#ffffffde",
           }}>
-          <Tabs
-            centered
-            value={value}
-            onChange={handleChange}
-            variant="fullWidth"
-            aria-label="search result options">
-            <Tab label="Articles" {...a11yProps(0)} />
-            <Tab label="Authors" {...a11yProps(1)} />
-          </Tabs>
-        </Box>
+          <Grid item xs={10}>
+            <Tabs
+              centered
+              value={value}
+              onChange={handleChange}
+              variant="fullWidth"
+              aria-label="explore options">
+              <Tab label="Articles" {...a11yProps(0)} />
+              <Tab label="Authors" {...a11yProps(1)} />
+            </Tabs>
+          </Grid>
+          <Grid
+            item
+            xs={2}
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+              pr: 2,
+            }}>
+            <Fab
+              size="small"
+              color="primary"
+              aria-label="search"
+              onClick={handleSearchButtonClick}>
+              <SearchIcon />
+            </Fab>
+          </Grid>
+        </Grid>
         <TabPanel value={value} index={0}>
-          A list of articles
+          <Toolbar />
+          <BlogPostCard />
+          <BlogPostCard />
+          <BlogPostCard />
+          <BlogPostCard />
+          <BlogPostCard />
+          <Toolbar />
+          <Toolbar />
         </TabPanel>
         <TabPanel value={value} index={1}>
           A list of authors
